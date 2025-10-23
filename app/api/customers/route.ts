@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { getMongoDb } from '@/lib/mongodb';
 import { Customer, CreateCustomerDto } from '@/lib/customer-types';
 
+export const dynamic = 'force-dynamic';
+
 // GET /api/customers - Obtener todos los clientes
 export async function GET() {
   try {

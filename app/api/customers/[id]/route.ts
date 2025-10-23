@@ -3,6 +3,8 @@ import { getMongoDb } from '@/lib/mongodb';
 import { Customer, UpdateCustomerDto } from '@/lib/customer-types';
 import { ObjectId } from 'mongodb';
 
+export const dynamic = 'force-dynamic';
+
 // GET /api/customers/[id] - Obtener un cliente específico
 export async function GET(
   request: Request,

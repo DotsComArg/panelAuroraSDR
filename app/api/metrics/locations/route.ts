@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { queryPostgres } from '@/lib/postgresql';
 
+export const dynamic = 'force-dynamic';
+
 // Mapeo de códigos de país a nombres
 const countryMap: Record<string, string> = {
   '54': 'Argentina',
