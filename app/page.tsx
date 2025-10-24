@@ -19,7 +19,7 @@ export default function HomePage() {
         <main className="flex-1 overflow-auto p-6">
           <PageTransition>
             <div className="space-y-6">
-              {/* Métricas principales desde n8n */}
+              {/* Métricas principales */}
               <MetricsOverview />
 
               {/* Top section - Agents IA full width */}

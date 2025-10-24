@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts"
-import { DashboardMetrics } from "@/lib/n8n-types"
+import { DashboardMetrics } from "@/lib/dashboard-types"
 
 // Datos eliminados - se mostrará mensaje de "Aún no tenemos datos"
 

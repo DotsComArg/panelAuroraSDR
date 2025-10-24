@@ -8,11 +8,10 @@ import {
   Calendar, 
   CheckCircle, 
   Clock, 
-  TrendingUp, 
-  MessageSquare,
+  TrendingUp,
   Package
 } from "lucide-react"
-import { DashboardMetrics } from "@/lib/n8n-types"
+import { DashboardMetrics } from "@/lib/dashboard-types"
 
 export function MetricsOverview() {
   const [metrics, setMetrics] = useState<DashboardMetrics | null>(null)
@@ -216,35 +215,6 @@ export function MetricsOverview() {
             <p className="text-sm text-muted-foreground">
               {generales.cierresEfectivos} cierres sin intervención
             </p>
-          </CardContent>
-        </Card>
-
-        {/* Adecuación de Marca */}
-        <Card className="transition-all duration-300 hover:shadow-lg">
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <CardTitle className="text-base">Comunicación de Marca</CardTitle>
-              <MessageSquare className="h-5 w-5 text-primary" />
-            </div>
-            <CardDescription>Adecuación al tono y estilo</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            <div className="text-3xl font-bold">
-              {comunicacion.adecuacionMarca}%
-            </div>
-            <Progress 
-              value={comunicacion.adecuacionMarca} 
-              className="h-2"
-            />
-            <div className="flex items-center gap-2 mt-2">
-              <Badge 
-                variant={comunicacion.adecuacionMarca >= 90 ? "default" : "secondary"}
-                className="text-xs"
-              >
-                {comunicacion.adecuacionMarca >= 90 ? "Excelente" : 
-                 comunicacion.adecuacionMarca >= 75 ? "Bueno" : "Mejorable"}
-              </Badge>
-            </div>
           </CardContent>
         </Card>
 

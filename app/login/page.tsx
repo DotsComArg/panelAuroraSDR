@@ -377,15 +377,6 @@ export default function LoginPage() {
                   "Iniciar Sesión"
                 )}
               </Button>
-
-              {/* Credenciales de prueba */}
-              <div className="mt-6 p-4 bg-white/5 backdrop-blur-md rounded-lg border border-white/10">
-                <p className="text-xs text-gray-300 font-semibold mb-2">Credenciales de prueba:</p>
-                <div className="space-y-1 text-xs text-gray-300">
-                  <p><span className="font-medium">Propietario:</span> admin@aurorasdr.ai / admin</p>
-                  <p><span className="font-medium">Cliente:</span> contacto@academiamav.com / cliente</p>
-                </div>
-              </div>
             </form>
           </div>
         </div>

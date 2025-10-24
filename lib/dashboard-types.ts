@@ -1,4 +1,4 @@
-// Tipos para la base de datos de n8n
+// Tipos para las métricas del dashboard
 
 export interface ExecutionEntity {
   id: string;

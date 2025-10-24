@@ -19,7 +19,7 @@ export function MeetingsOverview() {
             <Calendar className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
             <p className="text-muted-foreground text-sm">¡Aún no tenemos datos!</p>
             <p className="text-xs text-muted-foreground max-w-xs">
-              Configure el registro de reuniones en n8n para ver esta información.
+              Configure el registro de reuniones para ver esta información.
             </p>
           </div>
         </div>

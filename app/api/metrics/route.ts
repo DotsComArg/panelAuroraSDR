@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { queryPostgres } from '@/lib/postgresql';
-import { DashboardMetrics, MetricasGenerales, MetricasComunicacion, MetricasPorPeriodo } from '@/lib/n8n-types';
+import { DashboardMetrics, MetricasGenerales, MetricasComunicacion, MetricasPorPeriodo } from '@/lib/dashboard-types';
 
 export const dynamic = 'force-dynamic';
 
@@ -38,7 +38,7 @@ export async function GET(request: Request) {
     const respuestasExitosas = parseInt(respuestasExitosasResult[0]?.total || '0');
 
     // 3. Número de reuniones agendadas - Por ahora no tenemos datos reales
-    // Se debe configurar en n8n para guardar cuando se agenda una reunión
+    // Se debe configurar para guardar cuando se agenda una reunión
     const reunionesAgendadas = 0; // null significa que no hay datos configurados
 
     // 4. Total de respuestas (todas las ejecuciones)

@@ -21,7 +21,7 @@ export async function GET(request: Request) {
           message,
           type,
           created_at
-        FROM n8n_chat_histories
+        FROM chat_histories
         WHERE session_id = $1
         ORDER BY created_at DESC
         LIMIT $2
@@ -36,7 +36,7 @@ export async function GET(request: Request) {
           MAX(created_at) as ultima_interaccion,
           COUNT(CASE WHEN type = 'human' THEN 1 END) as mensajes_usuario,
           COUNT(CASE WHEN type = 'ai' THEN 1 END) as mensajes_bot
-        FROM n8n_chat_histories
+        FROM chat_histories
         WHERE created_at >= NOW() - INTERVAL '30 days'
         GROUP BY session_id
         ORDER BY ultima_interaccion DESC

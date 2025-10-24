@@ -1,13 +1,12 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { User, Shield, CreditCard, Bell, Key, Calendar, Download, Edit, Eye, EyeOff, Save, Bot } from "lucide-react"
+import { User, CreditCard, Calendar, Save, Bot } from "lucide-react"
 import { PageTransition } from "@/components/page-transition"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Switch } from "@/components/ui/switch"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Customer } from "@/lib/customer-types"
@@ -17,7 +16,6 @@ export default function ConfiguracionPage() {
   const [customer, setCustomer] = useState<Customer | null>(null)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
-  const [showPassword, setShowPassword] = useState(false)
   
   // Estados para edición
   const [formData, setFormData] = useState({
@@ -31,12 +29,6 @@ export default function ConfiguracionPage() {
     twoFactorAuth: false
   })
 
-  const [notifications, setNotifications] = useState({
-    email: true,
-    push: false,
-    sms: true,
-    reports: true,
-  })
 
   useEffect(() => {
     loadCustomerData()
@@ -316,128 +308,6 @@ export default function ConfiguracionPage() {
             </CardContent>
           </Card>
 
-          {/* Security Settings */}
-          <Card className="transition-all duration-300 hover:shadow-lg">
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
-                <Shield className="h-5 w-5 text-primary" />
-                <span>Seguridad</span>
-              </CardTitle>
-              <CardDescription>Gestiona tu contraseña y configuración de seguridad</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="currentPassword">Contraseña Actual</Label>
-                  <div className="relative">
-                    <Input
-                      id="currentPassword"
-                      type={showPassword ? "text" : "password"}
-                      placeholder="Ingresa tu contraseña actual"
-                    />
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="sm"
-                      className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-                      onClick={() => setShowPassword(!showPassword)}
-                    >
-                      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                    </Button>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="newPassword">Nueva Contraseña</Label>
-                  <Input id="newPassword" type="password" placeholder="Ingresa tu nueva contraseña" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="confirmPassword">Confirmar Contraseña</Label>
-                  <Input id="confirmPassword" type="password" placeholder="Confirma tu nueva contraseña" />
-                </div>
-              </div>
-
-              <Separator />
-
-              <div className="space-y-4">
-                <h4 className="font-medium">Autenticación de Dos Factores</h4>
-                <div className="flex items-center justify-between">
-                  <div className="space-y-1">
-                    <p className="text-sm font-medium">Activar 2FA</p>
-                    <p className="text-sm text-muted-foreground">Añade una capa extra de seguridad a tu cuenta</p>
-                  </div>
-                  <Switch 
-                    checked={formData.twoFactorAuth}
-                    onCheckedChange={(checked) => setFormData({...formData, twoFactorAuth: checked})}
-                  />
-                </div>
-              </div>
-
-              <div className="flex space-x-3">
-                <Button className="bg-primary hover:bg-primary/90">
-                  <Key className="h-4 w-4 mr-2" />
-                  Actualizar Contraseña
-                </Button>
-                <Button variant="outline">Recuperar Contraseña</Button>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Notifications */}
-          <Card className="transition-all duration-300 hover:shadow-lg">
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
-                <Bell className="h-5 w-5 text-primary" />
-                <span>Notificaciones</span>
-              </CardTitle>
-              <CardDescription>Configura cómo y cuándo recibir notificaciones</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="space-y-1">
-                    <p className="text-sm font-medium">Notificaciones por Email</p>
-                    <p className="text-sm text-muted-foreground">Recibe actualizaciones importantes por correo</p>
-                  </div>
-                  <Switch
-                    checked={notifications.email}
-                    onCheckedChange={(checked) => setNotifications({ ...notifications, email: checked })}
-                  />
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="space-y-1">
-                    <p className="text-sm font-medium">Notificaciones Push</p>
-                    <p className="text-sm text-muted-foreground">Recibe notificaciones en tiempo real</p>
-                  </div>
-                  <Switch
-                    checked={notifications.push}
-                    onCheckedChange={(checked) => setNotifications({ ...notifications, push: checked })}
-                  />
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="space-y-1">
-                    <p className="text-sm font-medium">Notificaciones SMS</p>
-                    <p className="text-sm text-muted-foreground">Recibe alertas críticas por mensaje de texto</p>
-                  </div>
-                  <Switch
-                    checked={notifications.sms}
-                    onCheckedChange={(checked) => setNotifications({ ...notifications, sms: checked })}
-                  />
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="space-y-1">
-                    <p className="text-sm font-medium">Reportes Semanales</p>
-                    <p className="text-sm text-muted-foreground">Recibe resúmenes de actividad semanales</p>
-                  </div>
-                  <Switch
-                    checked={notifications.reports}
-                    onCheckedChange={(checked) => setNotifications({ ...notifications, reports: checked })}
-                  />
-                </div>
-              </div>
-
-              <Button className="bg-primary hover:bg-primary/90">Guardar Preferencias</Button>
-            </CardContent>
-          </Card>
         </div>
 
         {/* Right Column - Subscription & Account Info */}
@@ -466,18 +336,18 @@ export default function ConfiguracionPage() {
                   <span>Agentes contratados</span>
                   <span className="font-medium flex items-center gap-1">
                     <Bot className="h-3 w-3" />
-                    {customer.cantidadAgentes}
+                    1
                   </span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span>2FA Activado</span>
-                  <Badge className={customer.twoFactorAuth ? "bg-green-100 text-green-800" : "bg-gray-100 text-gray-800"}>
-                    {customer.twoFactorAuth ? 'Sí' : 'No'}
+                  <Badge variant="outline" className="bg-amber-50 text-amber-700 border-amber-200">
+                    Próximamente
                   </Badge>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span>País</span>
-                  <span className="font-medium">{customer.pais}</span>
+                  <span className="font-medium">Colombia</span>
                 </div>
               </div>
 
@@ -486,9 +356,7 @@ export default function ConfiguracionPage() {
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span>Fecha de inicio</span>
-                  <span className="font-medium">
-                    {new Date(customer.fechaInicio).toLocaleDateString('es-ES')}
-                  </span>
+                  <span className="font-medium">10/2025</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span>Última actualización</span>
@@ -498,12 +366,6 @@ export default function ConfiguracionPage() {
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <Button className="w-full bg-primary hover:bg-primary/90">Actualizar Plan</Button>
-                <Button variant="outline" className="w-full bg-transparent">
-                  Gestionar Facturación
-                </Button>
-              </div>
             </CardContent>
           </Card>
 
@@ -519,23 +381,11 @@ export default function ConfiguracionPage() {
               <div className="space-y-3">
                 <div className="flex justify-between text-sm">
                   <span>Cuenta creada</span>
-                  <span className="font-medium">
-                    {new Date(customer.createdAt).toLocaleDateString('es-ES')}
-                  </span>
+                  <span className="font-medium">10/2025</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span>Email</span>
                   <span className="font-medium text-xs">{customer.email}</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span>Teléfono</span>
-                  <span className="font-medium">{customer.telefono}</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span>Rol</span>
-                  <Badge className={getRoleColor(customer.rol)}>
-                    {customer.rol}
-                  </Badge>
                 </div>
               </div>
             </CardContent>
