@@ -1,5 +1,6 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import { Bell, Settings, User, LogOut } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -15,13 +16,27 @@ import { useRouter } from "next/navigation"
 
 export function DashboardHeader() {
   const router = useRouter()
+  const [userEmail, setUserEmail] = useState("usuario@aurorasdr.ai")
+
+  useEffect(() => {
+    // Obtener el email del usuario desde las cookies
+    const email = document.cookie
+      .split('; ')
+      .find(row => row.startsWith('email='))
+      ?.split('=')[1]
+    
+    if (email) {
+      setUserEmail(email)
+    }
+  }, [])
 
   const handleLogout = () => {
-    // Limpiar cookies o sesión si las hay
+    // Limpiar todas las cookies de autenticación
+    document.cookie = "email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
     document.cookie = "role=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
     
-    // Redirigir al login
-    router.push("/login")
+    // Redirigir al login usando window.location para forzar recarga completa
+    window.location.href = "/login"
   }
 
   const handlePerfil = () => {
@@ -74,8 +89,8 @@ export function DashboardHeader() {
             <DropdownMenuContent className="w-56" align="end" forceMount>
               <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-medium leading-none">Admin</p>
-                  <p className="text-xs leading-none text-muted-foreground">admin@aurorasdr.ai</p>
+                  <p className="text-sm font-medium leading-none">Usuario</p>
+                  <p className="text-xs leading-none text-muted-foreground">{userEmail}</p>
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />

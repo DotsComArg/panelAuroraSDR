@@ -7,13 +7,20 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
   experimental: {
     serverActions: {
       bodySizeLimit: "2mb",
     },
   },
+  // Asegurar que las rutas estáticas se generen correctamente
+  trailingSlash: false,
 }
 
 export default nextConfig

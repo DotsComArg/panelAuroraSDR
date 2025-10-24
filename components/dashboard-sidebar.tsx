@@ -1,10 +1,10 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
-import { BarChart3, Bot, Home, MapPin, Settings, Users, ChevronLeft, ChevronRight } from "lucide-react"
+import { BarChart3, Bot, Home, MapPin, Settings, Users, ChevronLeft, ChevronRight, Shield } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
@@ -19,7 +19,18 @@ const navigation = [
 
 export function DashboardSidebar() {
   const [collapsed, setCollapsed] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false)
   const pathname = usePathname()
+
+  useEffect(() => {
+    // Verificar si el usuario es admin
+    const role = document.cookie
+      .split('; ')
+      .find(row => row.startsWith('role='))
+      ?.split('=')[1]
+    
+    setIsAdmin(role === 'SuperAdmin')
+  }, [])
 
   return (
     <div
@@ -98,20 +109,20 @@ export function DashboardSidebar() {
           )
         })}
 
-        {/* Link de Admin solo visible si hay cookie role=SuperAdmin */}
-        {typeof document !== "undefined" && document.cookie.includes("role=SuperAdmin") && (
+        {/* Link de Admin solo visible para SuperAdmin */}
+        {isAdmin && (
           <Link
             key="Admin"
             href="/admin"
             className={cn(
               "group flex items-center rounded-md text-sm font-medium transition-all duration-200 ease-in-out",
               collapsed ? "justify-center px-2 py-3" : "px-2 py-2",
-              pathname === "/admin"
+              pathname?.startsWith("/admin")
                 ? "bg-sidebar-primary text-sidebar-primary-foreground shadow-sm"
                 : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
             )}
           >
-            <Home className={cn("h-5 w-5 flex-shrink-0 transition-colors", collapsed ? "mr-0" : "mr-3")} />
+            <Shield className={cn("h-5 w-5 flex-shrink-0 transition-colors", collapsed ? "mr-0" : "mr-3")} />
             {!collapsed && <span className="truncate">Admin</span>}
           </Link>
         )}

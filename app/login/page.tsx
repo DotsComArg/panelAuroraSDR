@@ -176,9 +176,19 @@ export default function LoginPage() {
     try {
       // Simulación de login - en producción conectar con API real
       if (email === "admin@aurorasdr.ai" && password === "admin") {
-        router.replace("/")
+        // Establecer cookies de autenticación
+        document.cookie = `email=${email}; path=/; max-age=86400; SameSite=Lax`
+        document.cookie = `role=SuperAdmin; path=/; max-age=86400; SameSite=Lax`
+        
+        // Redirigir al dashboard
+        window.location.href = "/"
       } else if (email === "contacto@academiamav.com" && password === "cliente") {
-        router.replace("/")
+        // Establecer cookies de autenticación
+        document.cookie = `email=${email}; path=/; max-age=86400; SameSite=Lax`
+        document.cookie = `role=Cliente; path=/; max-age=86400; SameSite=Lax`
+        
+        // Redirigir al dashboard
+        window.location.href = "/"
       } else {
         setLoading(false)
         setError("Credenciales incorrectas")
