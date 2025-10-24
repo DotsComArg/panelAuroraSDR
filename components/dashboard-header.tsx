@@ -63,7 +63,7 @@ export function DashboardHeader() {
                 <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-primary animate-pulse" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-80" align="end">
+            <DropdownMenuContent className="w-80" align="end" sideOffset={8}>
               <DropdownMenuLabel>Notificaciones</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <div className="flex flex-col items-center justify-center py-8 text-center">
@@ -86,7 +86,7 @@ export function DashboardHeader() {
                 </Avatar>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56" align="end" forceMount>
+            <DropdownMenuContent className="w-56" align="end" sideOffset={8}>
               <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col space-y-1">
                   <p className="text-sm font-medium leading-none">Usuario</p>
