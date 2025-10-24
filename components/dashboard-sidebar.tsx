@@ -41,8 +41,10 @@ export function DashboardSidebar({ open = false, onClose }: DashboardSidebarProp
 
   // Cerrar menú móvil al cambiar de ruta
   useEffect(() => {
-    onClose?.()
-  }, [pathname, onClose])
+    if (open && pathname) {
+      onClose?.()
+    }
+  }, [pathname])
 
   return (
     <>

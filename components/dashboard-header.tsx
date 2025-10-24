@@ -52,9 +52,9 @@ export function DashboardHeader({ children }: DashboardHeaderProps) {
   }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-card backdrop-blur-sm">
+    <header className="sticky top-0 z-40 border-b border-border bg-card backdrop-blur-sm">
       <div className="flex h-16 items-center justify-between px-4 md:px-6">
-        <div className="flex items-center space-x-2 relative z-50">
+        <div className="flex items-center space-x-2">
           {children}
         </div>
 
