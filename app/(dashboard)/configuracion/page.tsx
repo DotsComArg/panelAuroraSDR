@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { User, CreditCard, Calendar, Save, Bot } from "lucide-react"
+import { User, CreditCard, Calendar, Bot } from "lucide-react"
 import { PageTransition } from "@/components/page-transition"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -10,12 +10,10 @@ import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Customer } from "@/lib/customer-types"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 export default function ConfiguracionPage() {
   const [customer, setCustomer] = useState<Customer | null>(null)
   const [loading, setLoading] = useState(true)
-  const [saving, setSaving] = useState(false)
   
   // Estados para edición
   const [formData, setFormData] = useState({
@@ -36,26 +34,61 @@ export default function ConfiguracionPage() {
 
   const loadCustomerData = async () => {
     try {
-      const response = await fetch('/api/customers')
-      if (response.ok) {
-        const data = await response.json()
-        // Asumimos que cargamos el primer customer por ahora
-        // En producción, cargarías el customer del usuario autenticado
-        if (data.success && data.data.length > 0) {
-          const customerData = data.data[0]
-          setCustomer(customerData)
-          setFormData({
-            nombre: customerData.nombre,
-            apellido: customerData.apellido,
-            email: customerData.email,
-            telefono: customerData.telefono,
-            pais: customerData.pais,
-            cantidadAgentes: customerData.cantidadAgentes,
-            planContratado: customerData.planContratado,
-            twoFactorAuth: customerData.twoFactorAuth
-          })
+      // Obtener el email del usuario logueado
+      const userEmail = document.cookie
+        .split('; ')
+        .find(row => row.startsWith('email='))
+        ?.split('=')[1]
+
+      // Datos hardcodeados según el usuario logueado
+      let customerData: any
+      
+      if (userEmail === 'contacto@academiamav.com') {
+        customerData = {
+          _id: 'academia-mav-001',
+          nombre: 'Academia Mav',
+          apellido: '',
+          email: 'contacto@academiamav.com',
+          telefono: '+57 300 123 4567',
+          pais: 'Colombia',
+          cantidadAgentes: 1,
+          planContratado: 'Custom',
+          twoFactorAuth: false,
+          rol: 'Cliente',
+          createdAt: new Date('2025-10-01'),
+          updatedAt: new Date(),
+          fechaInicio: new Date('2025-10-01')
+        }
+      } else {
+        // Usuario admin u otros
+        customerData = {
+          _id: 'admin-001',
+          nombre: 'Admin',
+          apellido: 'Aurora',
+          email: 'admin@aurorasdr.ai',
+          telefono: '+57 300 000 0000',
+          pais: 'Colombia',
+          cantidadAgentes: 1,
+          planContratado: 'Enterprise',
+          twoFactorAuth: false,
+          rol: 'Owner',
+          createdAt: new Date('2025-10-01'),
+          updatedAt: new Date(),
+          fechaInicio: new Date('2025-10-01')
         }
       }
+
+      setCustomer(customerData)
+      setFormData({
+        nombre: customerData.nombre,
+        apellido: customerData.apellido,
+        email: customerData.email,
+        telefono: customerData.telefono,
+        pais: customerData.pais,
+        cantidadAgentes: customerData.cantidadAgentes,
+        planContratado: customerData.planContratado,
+        twoFactorAuth: customerData.twoFactorAuth
+      })
     } catch (error) {
       console.error('Error al cargar datos del cliente:', error)
     } finally {
@@ -63,35 +96,6 @@ export default function ConfiguracionPage() {
     }
   }
 
-  const handleSaveProfile = async () => {
-    if (!customer?._id) return
-
-    setSaving(true)
-    try {
-      const response = await fetch(`/api/customers/${customer._id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      })
-
-      if (response.ok) {
-        const data = await response.json()
-        if (data.success) {
-          setCustomer(data.data)
-          alert('Datos guardados correctamente')
-        }
-      } else {
-        alert('Error al guardar los datos')
-      }
-    } catch (error) {
-      console.error('Error al guardar:', error)
-      alert('Error al guardar los datos')
-    } finally {
-      setSaving(false)
-    }
-  }
 
   if (loading) {
     return (
@@ -196,115 +200,49 @@ export default function ConfiguracionPage() {
                   {customer.rol}
                 </Badge>
               </div>
-              <CardDescription>Actualiza tu información de perfil y datos de contacto</CardDescription>
+              <CardDescription>Información de tu cuenta</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-              {customer.rol === 'Owner' ? (
-                // Vista simplificada para Owner
-                <div className="grid gap-4 md:grid-cols-2">
-                  <div className="space-y-2">
-                    <Label htmlFor="nombre">Nombre</Label>
-                    <Input 
-                      id="nombre" 
-                      value={formData.nombre}
-                      onChange={(e) => setFormData({...formData, nombre: e.target.value})}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input 
-                      id="email" 
-                      type="email" 
-                      value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
-                    />
-                  </div>
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="space-y-2">
+                  <Label htmlFor="nombre">Nombre</Label>
+                  <Input 
+                    id="nombre" 
+                    value={formData.nombre}
+                    disabled
+                    className="bg-muted cursor-not-allowed"
+                  />
                 </div>
-              ) : (
-                // Vista completa para Clientes
-                <>
-                  <div className="grid gap-4 md:grid-cols-2">
-                    <div className="space-y-2">
-                      <Label htmlFor="nombre">Nombre</Label>
-                      <Input 
-                        id="nombre" 
-                        value={formData.nombre}
-                        onChange={(e) => setFormData({...formData, nombre: e.target.value})}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="apellido">Apellido</Label>
-                      <Input 
-                        id="apellido" 
-                        value={formData.apellido}
-                        onChange={(e) => setFormData({...formData, apellido: e.target.value})}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email</Label>
-                      <Input 
-                        id="email" 
-                        type="email" 
-                        value={formData.email}
-                        onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="telefono">Teléfono</Label>
-                      <Input 
-                        id="telefono" 
-                        value={formData.telefono}
-                        onChange={(e) => setFormData({...formData, telefono: e.target.value})}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="pais">País</Label>
-                      <Input 
-                        id="pais" 
-                        value={formData.pais}
-                        onChange={(e) => setFormData({...formData, pais: e.target.value})}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="cantidadAgentes">Cantidad de Agentes</Label>
-                      <Input 
-                        id="cantidadAgentes" 
-                        type="number"
-                        min="1"
-                        value={formData.cantidadAgentes}
-                        onChange={(e) => setFormData({...formData, cantidadAgentes: parseInt(e.target.value) || 1})}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="planContratado">Plan Contratado</Label>
-                    <Select 
-                      value={formData.planContratado}
-                      onValueChange={(value: any) => setFormData({...formData, planContratado: value})}
-                    >
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="Básico">Básico</SelectItem>
-                        <SelectItem value="Profesional">Profesional</SelectItem>
-                        <SelectItem value="Enterprise">Enterprise</SelectItem>
-                        <SelectItem value="Custom">Custom</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </>
-              )}
-
-              <Button 
-                className="bg-primary hover:bg-primary/90" 
-                onClick={handleSaveProfile}
-                disabled={saving}
-              >
-                <Save className="h-4 w-4 mr-2" />
-                {saving ? 'Guardando...' : 'Guardar Cambios'}
-              </Button>
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input 
+                    id="email" 
+                    type="email" 
+                    value={formData.email}
+                    disabled
+                    className="bg-muted cursor-not-allowed"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="pais">País</Label>
+                  <Input 
+                    id="pais" 
+                    value={formData.pais}
+                    disabled
+                    className="bg-muted cursor-not-allowed"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="cantidadAgentes">Cantidad de Agentes</Label>
+                  <Input 
+                    id="cantidadAgentes" 
+                    type="number"
+                    value={formData.cantidadAgentes}
+                    disabled
+                    className="bg-muted cursor-not-allowed"
+                  />
+                </div>
+              </div>
             </CardContent>
           </Card>
 
