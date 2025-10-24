@@ -7,9 +7,6 @@ import { PerformanceCharts } from "@/components/performance-charts"
 import { MetricsOverview } from "@/components/metrics-overview"
 import { PageTransition } from "@/components/page-transition"
 
-// Forzar renderizado dinámico para evitar problemas con middleware durante build
-export const dynamic = 'force-dynamic'
-
 export default function DashboardPage() {
   return (
     <PageTransition>
