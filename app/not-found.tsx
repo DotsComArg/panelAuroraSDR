@@ -1,5 +1,4 @@
 export default function NotFound() {
-  console.log('[NOT FOUND] 404 page rendered')
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-background">
       <div className="text-center space-y-4">

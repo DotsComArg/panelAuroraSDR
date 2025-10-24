@@ -1,15 +1,24 @@
 "use client"
 
 import type React from "react";
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { DashboardHeader } from "@/components/dashboard-header";
 import { DashboardSidebar } from "@/components/dashboard-sidebar";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter()
+  const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
+    // Marcar que estamos del lado del cliente
+    setIsClient(true)
+  }, [])
+
+  useEffect(() => {
+    // Solo verificar autenticación en el cliente, no durante SSR
+    if (!isClient) return
+
     // Verificar autenticación y permisos de admin
     const email = document.cookie
       .split('; ')
@@ -33,7 +42,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       console.log('[ADMIN LAYOUT] No admin permissions, redirecting to /')
       router.replace('/?unauthorized=1')
     }
-  }, [router])
+  }, [router, isClient])
 
   return (
     <div className="flex h-screen bg-background">
