@@ -331,28 +331,20 @@ export default function LoginPage() {
                 </div>
               </div>
 
-              {/* Remember y Forgot Password */}
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0">
-                <div className="flex items-center space-x-2">
-                  <Checkbox 
-                    id="remember" 
-                    checked={remember}
-                    onCheckedChange={(checked) => setRemember(checked as boolean)}
-                    className="border-white/30 data-[state=checked]:bg-purple-600 data-[state=checked]:border-purple-600"
-                  />
-                  <label
-                    htmlFor="remember"
-                    className="text-xs sm:text-sm font-medium text-gray-300 cursor-pointer"
-                  >
-                    Recordarme
-                  </label>
-                </div>
-                <button
-                  type="button"
-                  className="text-xs sm:text-sm text-purple-400 hover:text-purple-300 font-medium transition-colors text-left sm:text-right"
+              {/* Remember */}
+              <div className="flex items-center space-x-2">
+                <Checkbox 
+                  id="remember" 
+                  checked={remember}
+                  onCheckedChange={(checked) => setRemember(checked as boolean)}
+                  className="border-white/30 data-[state=checked]:bg-purple-600 data-[state=checked]:border-purple-600"
+                />
+                <label
+                  htmlFor="remember"
+                  className="text-xs sm:text-sm font-medium text-gray-300 cursor-pointer"
                 >
-                  ¿Olvidaste tu contraseña?
-                </button>
+                  Recordarme
+                </label>
               </div>
 
               {/* Error */}
