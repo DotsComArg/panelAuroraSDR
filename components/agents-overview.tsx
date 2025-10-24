@@ -44,30 +44,30 @@ export function AgentsOverview() {
       <Card className="col-span-2 transition-all duration-300">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <div className="space-y-2">
-            <div className="h-6 bg-muted/50 rounded w-32 animate-pulse" />
-            <div className="h-4 bg-muted/30 rounded w-48 animate-pulse" />
+            <div className="h-5 sm:h-6 bg-muted/50 rounded w-24 sm:w-32 animate-pulse" />
+            <div className="h-3 sm:h-4 bg-muted/30 rounded w-36 sm:w-48 animate-pulse" />
           </div>
-          <div className="h-8 w-8 bg-muted/50 rounded-full animate-pulse" />
+          <div className="h-6 w-6 sm:h-8 sm:w-8 bg-muted/50 rounded-full animate-pulse" />
         </CardHeader>
         <CardContent>
-          <div className="flex items-center justify-between p-4 rounded-lg border border-border bg-card/50">
-            <div className="flex items-center space-x-4">
-              <div className="h-12 w-12 bg-muted/50 rounded-full animate-pulse" />
-              <div className="space-y-2">
-                <div className="h-5 bg-muted/50 rounded w-36 animate-pulse" />
-                <div className="h-4 bg-muted/30 rounded w-48 animate-pulse" />
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-3 sm:p-4 rounded-lg border border-border bg-card/50">
+            <div className="flex items-center space-x-3 sm:space-x-4">
+              <div className="h-10 w-10 sm:h-12 sm:w-12 bg-muted/50 rounded-full animate-pulse flex-shrink-0" />
+              <div className="space-y-2 min-w-0">
+                <div className="h-4 sm:h-5 bg-muted/50 rounded w-32 sm:w-36 animate-pulse" />
+                <div className="h-3 sm:h-4 bg-muted/30 rounded w-40 sm:w-48 animate-pulse" />
               </div>
             </div>
-            <div className="flex items-center space-x-6">
-              <div className="text-right space-y-2">
-                <div className="h-5 bg-muted/50 rounded w-16 animate-pulse" />
-                <div className="h-3 bg-muted/30 rounded w-20 animate-pulse" />
+            <div className="flex items-center gap-3 sm:gap-6 ml-13 sm:ml-0">
+              <div className="text-right space-y-1 sm:space-y-2">
+                <div className="h-4 sm:h-5 bg-muted/50 rounded w-12 sm:w-16 animate-pulse" />
+                <div className="h-2 sm:h-3 bg-muted/30 rounded w-16 sm:w-20 animate-pulse" />
               </div>
-              <div className="text-right space-y-2">
-                <div className="h-5 bg-muted/50 rounded w-12 animate-pulse" />
-                <div className="h-3 bg-muted/30 rounded w-24 animate-pulse" />
+              <div className="text-right space-y-1 sm:space-y-2">
+                <div className="h-4 sm:h-5 bg-muted/50 rounded w-10 sm:w-12 animate-pulse" />
+                <div className="h-2 sm:h-3 bg-muted/30 rounded w-20 sm:w-24 animate-pulse" />
               </div>
-              <div className="h-6 w-16 bg-muted/50 rounded animate-pulse" />
+              <div className="h-5 sm:h-6 w-14 sm:w-16 bg-muted/50 rounded animate-pulse flex-shrink-0" />
             </div>
           </div>
         </CardContent>
@@ -78,42 +78,42 @@ export function AgentsOverview() {
   return (
     <Card className="col-span-2 transition-all duration-300 hover:shadow-lg">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <div>
-          <CardTitle className="text-2xl font-bold">Agente IA</CardTitle>
-          <CardDescription>
+        <div className="min-w-0">
+          <CardTitle className="text-xl sm:text-2xl font-bold truncate">Agente IA</CardTitle>
+          <CardDescription className="text-xs sm:text-sm truncate">
             Academia MAV - Agente activo
           </CardDescription>
         </div>
-        <div className="flex items-center space-x-2">
-          <Bot className="h-8 w-8 text-primary" />
+        <div className="flex items-center space-x-2 flex-shrink-0">
+          <Bot className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
         </div>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          <div className="flex items-center justify-between p-4 rounded-lg border border-border bg-card/50 transition-all duration-200 hover:bg-card hover:shadow-sm">
-            <div className="flex items-center space-x-4">
-              <div className="relative">
-                <Bot className="h-12 w-12 text-primary" />
-                <CheckCircle className="absolute -bottom-1 -right-1 h-5 w-5 text-green-500 bg-background rounded-full" />
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-3 sm:p-4 rounded-lg border border-border bg-card/50 transition-all duration-200 hover:bg-card hover:shadow-sm">
+            <div className="flex items-center space-x-3 sm:space-x-4 min-w-0">
+              <div className="relative flex-shrink-0">
+                <Bot className="h-10 w-10 sm:h-12 sm:w-12 text-primary" />
+                <CheckCircle className="absolute -bottom-1 -right-1 h-4 w-4 sm:h-5 sm:w-5 text-green-500 bg-background rounded-full" />
               </div>
-              <div>
-                <h4 className="font-semibold text-lg">Academia MAV IA</h4>
-                <p className="text-sm text-muted-foreground">Integrado con Aurora SDR IA y Kommo CRM</p>
+              <div className="min-w-0 flex-1">
+                <h4 className="font-semibold text-base sm:text-lg truncate">Academia MAV IA</h4>
+                <p className="text-xs sm:text-sm text-muted-foreground line-clamp-1">Integrado con Aurora SDR IA y Kommo CRM</p>
               </div>
             </div>
-            <div className="flex items-center space-x-6">
-              <div className="text-right">
-                <div className="flex items-center space-x-2">
-                  <Activity className="h-4 w-4 text-muted-foreground" />
-                  <span className="font-medium text-lg">{agentStats?.tasaExito || 0}%</span>
+            <div className="flex items-center gap-3 sm:gap-6 ml-13 sm:ml-0">
+              <div className="text-left sm:text-right">
+                <div className="flex items-center gap-1 sm:gap-2">
+                  <Activity className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
+                  <span className="font-medium text-base sm:text-lg">{agentStats?.tasaExito || 0}%</span>
                 </div>
-                <p className="text-xs text-muted-foreground">Tasa de éxito</p>
+                <p className="text-[10px] sm:text-xs text-muted-foreground">Tasa de éxito</p>
               </div>
-              <div className="text-right">
-                <div className="font-medium text-lg">{agentStats?.exitosas || 0}</div>
-                <p className="text-xs text-muted-foreground">Respuestas exitosas</p>
+              <div className="text-left sm:text-right">
+                <div className="font-medium text-base sm:text-lg">{agentStats?.exitosas || 0}</div>
+                <p className="text-[10px] sm:text-xs text-muted-foreground whitespace-nowrap">Respuestas exitosas</p>
               </div>
-              <Badge variant="default" className="transition-all duration-200">
+              <Badge variant="default" className="transition-all duration-200 text-xs sm:text-sm flex-shrink-0">
                 Activo
               </Badge>
             </div>

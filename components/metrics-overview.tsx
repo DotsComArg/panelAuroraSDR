@@ -41,16 +41,16 @@ export function MetricsOverview() {
 
   if (loading) {
     return (
-      <div className="space-y-6">
+      <div className="space-y-4 md:space-y-6">
         {/* Skeleton para métricas principales */}
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+        <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {[1, 2, 3, 4, 5].map((i) => (
             <Card key={i} className="transition-all duration-300">
               <CardHeader className="pb-2">
                 <div className="h-3 bg-muted/50 rounded w-2/3 animate-pulse" />
               </CardHeader>
               <CardContent>
-                <div className="h-8 bg-muted/50 rounded w-1/2 mb-2 animate-pulse" />
+                <div className="h-6 sm:h-8 bg-muted/50 rounded w-1/2 mb-2 animate-pulse" />
                 <div className="h-2 bg-muted/30 rounded w-3/4 animate-pulse" />
               </CardContent>
             </Card>
@@ -58,7 +58,7 @@ export function MetricsOverview() {
         </div>
         
         {/* Skeleton para métricas secundarias */}
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {[1, 2, 3].map((i) => (
             <Card key={i} className="transition-all duration-300">
               <CardHeader>
@@ -92,9 +92,9 @@ export function MetricsOverview() {
   const { generales, comunicacion } = metrics
 
   return (
-    <div className="space-y-6">
-      {/* Métricas principales en grid - 5 columnas */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+    <div className="space-y-4 md:space-y-6">
+      {/* Métricas principales en grid - responsive */}
+      <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         {/* Leads Totales */}
         <Card className="transition-all duration-300 hover:shadow-lg">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -193,8 +193,8 @@ export function MetricsOverview() {
         </Card>
       </div>
 
-      {/* Métricas secundarias en grid de 3 columnas */}
-      <div className="grid gap-6 md:grid-cols-3">
+      {/* Métricas secundarias - responsive */}
+      <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {/* Cierres Efectivos */}
         <Card className="transition-all duration-300 hover:shadow-lg">
           <CardHeader>

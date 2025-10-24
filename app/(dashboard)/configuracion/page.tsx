@@ -174,72 +174,72 @@ export default function ConfiguracionPage() {
 
   return (
     <PageTransition>
-      <div className="space-y-6">
+      <div className="space-y-4 sm:space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-foreground">Configuración</h1>
-          <p className="text-muted-foreground mt-1">
+        <div className="min-w-0">
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground truncate">Configuración</h1>
+          <p className="text-xs sm:text-sm text-muted-foreground mt-1 line-clamp-2">
             {customer.rol === 'Owner' ? 'Configuración del sistema' : 'Gestiona tu cuenta, seguridad y preferencias'}
           </p>
         </div>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid gap-4 sm:gap-6 lg:grid-cols-3">
         {/* Left Column - Profile & Account */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="lg:col-span-2 space-y-4 sm:space-y-6">
           {/* Profile Information */}
           <Card className="transition-all duration-300 hover:shadow-lg">
             <CardHeader>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <User className="h-5 w-5 text-primary" />
-                  <CardTitle>Información Personal</CardTitle>
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2 min-w-0">
+                  <User className="h-4 w-4 sm:h-5 sm:w-5 text-primary flex-shrink-0" />
+                  <CardTitle className="text-base sm:text-lg truncate">Información Personal</CardTitle>
                 </div>
-                <Badge className={getRoleColor(customer.rol)}>
+                <Badge className={getRoleColor(customer.rol) + " flex-shrink-0 text-xs"}>
                   {customer.rol}
                 </Badge>
               </div>
-              <CardDescription>Información de tu cuenta</CardDescription>
+              <CardDescription className="text-xs sm:text-sm">Información de tu cuenta</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="grid gap-4 md:grid-cols-2">
-                <div className="space-y-2">
-                  <Label htmlFor="nombre">Nombre</Label>
+            <CardContent className="space-y-4 sm:space-y-6">
+              <div className="grid gap-3 sm:gap-4 md:grid-cols-2">
+                <div className="space-y-1.5 sm:space-y-2">
+                  <Label htmlFor="nombre" className="text-xs sm:text-sm">Nombre</Label>
                   <Input 
                     id="nombre" 
                     value={formData.nombre}
                     disabled
-                    className="bg-muted cursor-not-allowed"
+                    className="bg-muted cursor-not-allowed text-xs sm:text-sm h-9 sm:h-10"
                   />
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
+                <div className="space-y-1.5 sm:space-y-2">
+                  <Label htmlFor="email" className="text-xs sm:text-sm">Email</Label>
                   <Input 
                     id="email" 
                     type="email" 
                     value={formData.email}
                     disabled
-                    className="bg-muted cursor-not-allowed"
+                    className="bg-muted cursor-not-allowed text-xs sm:text-sm h-9 sm:h-10"
                   />
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="pais">País</Label>
+                <div className="space-y-1.5 sm:space-y-2">
+                  <Label htmlFor="pais" className="text-xs sm:text-sm">País</Label>
                   <Input 
                     id="pais" 
                     value={formData.pais}
                     disabled
-                    className="bg-muted cursor-not-allowed"
+                    className="bg-muted cursor-not-allowed text-xs sm:text-sm h-9 sm:h-10"
                   />
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="cantidadAgentes">Cantidad de Agentes</Label>
+                <div className="space-y-1.5 sm:space-y-2">
+                  <Label htmlFor="cantidadAgentes" className="text-xs sm:text-sm">Cantidad de Agentes</Label>
                   <Input 
                     id="cantidadAgentes" 
                     type="number"
                     value={formData.cantidadAgentes}
                     disabled
-                    className="bg-muted cursor-not-allowed"
+                    className="bg-muted cursor-not-allowed text-xs sm:text-sm h-9 sm:h-10"
                   />
                 </div>
               </div>
@@ -249,41 +249,41 @@ export default function ConfiguracionPage() {
         </div>
 
         {/* Right Column - Subscription & Account Info */}
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {/* Subscription */}
           <Card className="transition-all duration-300 hover:shadow-lg">
             <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
-                <CreditCard className="h-5 w-5 text-primary" />
+              <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+                <CreditCard className="h-4 w-4 sm:h-5 sm:w-5 text-primary flex-shrink-0" />
                 <span>Membresía</span>
               </CardTitle>
-              <CardDescription>Información de tu plan actual</CardDescription>
+              <CardDescription className="text-xs sm:text-sm">Información de tu plan actual</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-3 sm:space-y-4">
               <div className="text-center space-y-2">
-                <Badge className={getPlanColor(customer.planContratado) + " px-3 py-1"}>
+                <Badge className={getPlanColor(customer.planContratado) + " px-2 sm:px-3 py-1 text-xs sm:text-sm"}>
                   Plan {customer.planContratado}
                 </Badge>
-                <p className="text-sm text-muted-foreground">Plan contratado</p>
+                <p className="text-xs sm:text-sm text-muted-foreground">Plan contratado</p>
               </div>
 
               <Separator />
 
-              <div className="space-y-3">
-                <div className="flex justify-between text-sm">
+              <div className="space-y-2 sm:space-y-3">
+                <div className="flex justify-between text-xs sm:text-sm">
                   <span>Agentes contratados</span>
                   <span className="font-medium flex items-center gap-1">
-                    <Bot className="h-3 w-3" />
+                    <Bot className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
                     1
                   </span>
                 </div>
-                <div className="flex justify-between text-sm">
+                <div className="flex justify-between text-xs sm:text-sm items-center">
                   <span>2FA Activado</span>
-                  <Badge variant="outline" className="bg-amber-50 text-amber-700 border-amber-200">
+                  <Badge variant="outline" className="bg-amber-50 text-amber-700 border-amber-200 text-[10px] sm:text-xs">
                     Próximamente
                   </Badge>
                 </div>
-                <div className="flex justify-between text-sm">
+                <div className="flex justify-between text-xs sm:text-sm">
                   <span>País</span>
                   <span className="font-medium">Colombia</span>
                 </div>
@@ -291,12 +291,12 @@ export default function ConfiguracionPage() {
 
               <Separator />
 
-              <div className="space-y-2">
-                <div className="flex justify-between text-sm">
+              <div className="space-y-1.5 sm:space-y-2">
+                <div className="flex justify-between text-xs sm:text-sm">
                   <span>Fecha de inicio</span>
                   <span className="font-medium">10/2025</span>
                 </div>
-                <div className="flex justify-between text-sm">
+                <div className="flex justify-between text-xs sm:text-sm">
                   <span>Última actualización</span>
                   <span className="font-medium">
                     {new Date(customer.updatedAt).toLocaleDateString('es-ES')}
@@ -310,20 +310,20 @@ export default function ConfiguracionPage() {
           {/* Account Summary */}
           <Card className="transition-all duration-300 hover:shadow-lg">
             <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
-                <Calendar className="h-5 w-5 text-primary" />
+              <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+                <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-primary flex-shrink-0" />
                 <span>Resumen de Cuenta</span>
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-3">
-                <div className="flex justify-between text-sm">
+            <CardContent className="space-y-3 sm:space-y-4">
+              <div className="space-y-2 sm:space-y-3">
+                <div className="flex justify-between text-xs sm:text-sm">
                   <span>Cuenta creada</span>
                   <span className="font-medium">10/2025</span>
                 </div>
-                <div className="flex justify-between text-sm">
-                  <span>Email</span>
-                  <span className="font-medium text-xs">{customer.email}</span>
+                <div className="flex justify-between text-xs sm:text-sm gap-2">
+                  <span className="flex-shrink-0">Email</span>
+                  <span className="font-medium text-[10px] sm:text-xs truncate">{customer.email}</span>
                 </div>
               </div>
             </CardContent>

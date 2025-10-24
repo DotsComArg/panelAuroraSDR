@@ -14,7 +14,11 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { useRouter } from "next/navigation"
 
-export function DashboardHeader() {
+interface DashboardHeaderProps {
+  children?: React.ReactNode
+}
+
+export function DashboardHeader({ children }: DashboardHeaderProps) {
   const router = useRouter()
   const [userEmail, setUserEmail] = useState("usuario@aurorasdr.ai")
 
@@ -48,13 +52,13 @@ export function DashboardHeader() {
   }
 
   return (
-    <header className="border-b border-border bg-card/50 backdrop-blur-sm">
-      <div className="flex h-16 items-center justify-between px-6">
-        <div className="flex items-center space-x-4">
-          {/* El logo ahora está en el sidebar */}
+    <header className="sticky top-0 z-50 border-b border-border bg-card backdrop-blur-sm">
+      <div className="flex h-16 items-center justify-between px-4 md:px-6">
+        <div className="flex items-center space-x-2 relative z-50">
+          {children}
         </div>
 
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2 md:space-x-4">
           {/* Dropdown de notificaciones */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

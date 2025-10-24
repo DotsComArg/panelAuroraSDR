@@ -245,7 +245,7 @@ export default function LoginPage() {
       </div>
 
       {/* Panel Derecho - Formulario de Login con Partículas */}
-      <div className="flex-1 flex items-center justify-center p-8 bg-black lg:w-3/5 relative overflow-hidden">
+      <div className="flex-1 flex items-center justify-center p-4 sm:p-6 md:p-8 bg-black lg:w-3/5 relative overflow-hidden">
         {/* Canvas de partículas discretas */}
         <canvas
           ref={canvasRightRef}
@@ -255,40 +255,40 @@ export default function LoginPage() {
         
         <div className="w-full max-w-md relative z-10">
           {/* Logo para móvil */}
-          <div className="lg:hidden text-center mb-8">
-            <div className="inline-block bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl p-6 shadow-lg border border-purple-100">
+          <div className="lg:hidden text-center mb-6 sm:mb-8">
+            <div className="inline-block bg-gradient-to-br from-purple-50 to-blue-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg border border-purple-100">
               <Image 
                 src="/isotipo-aurora-profile.png" 
                 alt="Aurora SDR IA" 
                 width={80} 
                 height={80} 
-                className="w-20 h-20"
+                className="w-16 h-16 sm:w-20 sm:h-20"
                 priority
               />
             </div>
           </div>
 
           {/* Card de Login */}
-          <div className="bg-white/5 backdrop-blur-3xl rounded-2xl shadow-2xl p-8 border border-white/10">
+          <div className="bg-white/5 backdrop-blur-3xl rounded-xl sm:rounded-2xl shadow-2xl p-5 sm:p-6 md:p-8 border border-white/10">
             {/* Saludo */}
-            <div className="mb-8">
-              <h2 className="text-3xl font-bold text-white mb-2">
+            <div className="mb-6 sm:mb-8">
+              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
                 Iniciar Sesión
               </h2>
-              <p className="text-gray-300">
+              <p className="text-sm sm:text-base text-gray-300">
                 Ingresa tus credenciales para continuar
               </p>
             </div>
 
             {/* Formulario */}
-            <form onSubmit={onSubmit} className="space-y-6">
+            <form onSubmit={onSubmit} className="space-y-4 sm:space-y-6">
               {/* Email */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-200">
+              <div className="space-y-1.5 sm:space-y-2">
+                <label className="text-xs sm:text-sm font-medium text-gray-200">
                   Correo Electrónico
                 </label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                  <Mail className="absolute left-2.5 sm:left-3 top-1/2 -translate-y-1/2 h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
                   <Input
                     id="email"
                     type="email"
@@ -296,18 +296,18 @@ export default function LoginPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="pl-11 h-12 bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-purple-400 focus:ring-purple-400/50 backdrop-blur-md"
+                    className="pl-9 sm:pl-11 h-10 sm:h-12 text-sm sm:text-base bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-purple-400 focus:ring-purple-400/50 backdrop-blur-md"
                   />
                 </div>
               </div>
 
               {/* Password */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-200">
+              <div className="space-y-1.5 sm:space-y-2">
+                <label className="text-xs sm:text-sm font-medium text-gray-200">
                   Contraseña
                 </label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                  <Lock className="absolute left-2.5 sm:left-3 top-1/2 -translate-y-1/2 h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
                   <Input
                     id="password"
                     type={showPassword ? "text" : "password"}
@@ -315,24 +315,24 @@ export default function LoginPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className="pl-11 pr-11 h-12 bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-purple-400 focus:ring-purple-400/50 backdrop-blur-md"
+                    className="pl-9 sm:pl-11 pr-9 sm:pr-11 h-10 sm:h-12 text-sm sm:text-base bg-white/5 border-white/10 text-white placeholder:text-gray-400 focus:border-purple-400 focus:ring-purple-400/50 backdrop-blur-md"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-200"
+                    className="absolute right-2.5 sm:right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-200"
                   >
                     {showPassword ? (
-                      <EyeOff className="h-5 w-5" />
+                      <EyeOff className="h-4 w-4 sm:h-5 sm:w-5" />
                     ) : (
-                      <Eye className="h-5 w-5" />
+                      <Eye className="h-4 w-4 sm:h-5 sm:w-5" />
                     )}
                   </button>
                 </div>
               </div>
 
               {/* Remember y Forgot Password */}
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0">
                 <div className="flex items-center space-x-2">
                   <Checkbox 
                     id="remember" 
@@ -342,14 +342,14 @@ export default function LoginPage() {
                   />
                   <label
                     htmlFor="remember"
-                    className="text-sm font-medium text-gray-300 cursor-pointer"
+                    className="text-xs sm:text-sm font-medium text-gray-300 cursor-pointer"
                   >
                     Recordarme
                   </label>
                 </div>
                 <button
                   type="button"
-                  className="text-sm text-purple-400 hover:text-purple-300 font-medium transition-colors"
+                  className="text-xs sm:text-sm text-purple-400 hover:text-purple-300 font-medium transition-colors text-left sm:text-right"
                 >
                   ¿Olvidaste tu contraseña?
                 </button>
@@ -357,7 +357,7 @@ export default function LoginPage() {
 
               {/* Error */}
               {error && (
-                <div className="text-sm text-red-300 text-center p-3 bg-red-500/20 rounded-lg border border-red-400/20 backdrop-blur-md">
+                <div className="text-xs sm:text-sm text-red-300 text-center p-2.5 sm:p-3 bg-red-500/20 rounded-lg border border-red-400/20 backdrop-blur-md">
                   {error}
                 </div>
               )}
@@ -366,12 +366,13 @@ export default function LoginPage() {
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full h-12 text-base font-semibold bg-purple-600 hover:bg-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg disabled:opacity-80 disabled:cursor-not-allowed"
+                className="w-full h-10 sm:h-12 text-sm sm:text-base font-semibold bg-purple-600 hover:bg-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg disabled:opacity-80 disabled:cursor-not-allowed"
               >
                 {loading ? (
                   <span className="flex items-center justify-center gap-2">
-                    <Loader2 className="h-5 w-5 animate-spin" />
-                    Iniciando sesión...
+                    <Loader2 className="h-4 w-4 sm:h-5 sm:w-5 animate-spin" />
+                    <span className="hidden sm:inline">Iniciando sesión...</span>
+                    <span className="sm:hidden">Iniciando...</span>
                   </span>
                 ) : (
                   "Iniciar Sesión"

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
-import { BarChart3, Bot, Home, MapPin, Settings, Users, ChevronLeft, ChevronRight, Shield } from "lucide-react"
+import { BarChart3, Bot, Home, MapPin, Settings, Users, ChevronLeft, ChevronRight, Shield, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
@@ -17,10 +17,17 @@ const navigation = [
   { name: "Configuración", href: "/configuracion", icon: Settings },
 ]
 
-export function DashboardSidebar() {
+interface DashboardSidebarProps {
+  open?: boolean
+  onClose?: () => void
+}
+
+export function DashboardSidebar({ open = false, onClose }: DashboardSidebarProps = {}) {
   const [collapsed, setCollapsed] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
   const pathname = usePathname()
+
+  console.log('DashboardSidebar render - open:', open)
 
   useEffect(() => {
     // Verificar si el usuario es admin
@@ -32,13 +39,35 @@ export function DashboardSidebar() {
     setIsAdmin(role === 'SuperAdmin')
   }, [])
 
+  // Cerrar menú móvil al cambiar de ruta
+  useEffect(() => {
+    onClose?.()
+  }, [pathname, onClose])
+
   return (
-    <div
-      className={cn(
-        "flex flex-col bg-sidebar border-r border-sidebar-border transition-all duration-300 ease-in-out",
-        collapsed ? "w-20" : "w-64",
+    <>
+      {/* Overlay para móvil */}
+      {open && (
+        <div
+          className="fixed inset-0 bg-black/50 z-[60] lg:hidden"
+          onClick={onClose}
+        />
       )}
-    >
+
+      {/* Sidebar */}
+      <div
+        className={cn(
+          "flex flex-col bg-sidebar border-r border-sidebar-border transition-all duration-300 ease-in-out",
+          "fixed lg:static inset-y-0 left-0 z-[70]",
+          // Desktop
+          "lg:flex lg:translate-x-0",
+          collapsed ? "lg:w-20" : "lg:w-64",
+          // Mobile
+          "w-64",
+          // Mobile visibility
+          open ? "translate-x-0" : "-translate-x-full"
+        )}
+      >
       <div className={cn(
         "flex h-16 items-center border-b border-sidebar-border",
         collapsed ? "justify-center px-2" : "justify-between px-4"
@@ -53,14 +82,26 @@ export function DashboardSidebar() {
               className="h-11 w-auto" 
               priority
             />
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setCollapsed(!collapsed)}
-              className="h-8 w-8 text-sidebar-foreground hover:bg-sidebar-accent"
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </Button>
+            <div className="flex items-center gap-1">
+              {/* Botón cerrar móvil */}
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={onClose}
+                className="h-8 w-8 lg:hidden text-sidebar-foreground hover:bg-sidebar-accent"
+              >
+                <X className="h-4 w-4" />
+              </Button>
+              {/* Botón colapsar desktop */}
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setCollapsed(!collapsed)}
+                className="h-8 w-8 hidden lg:flex text-sidebar-foreground hover:bg-sidebar-accent"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </Button>
+            </div>
           </>
         ) : (
           <div className="flex flex-col items-center space-y-2">
@@ -146,5 +187,6 @@ export function DashboardSidebar() {
         )}
       </div>
     </div>
+    </>
   )
 }
