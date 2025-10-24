@@ -5,9 +5,11 @@ import { DashboardMetrics, MetricasGenerales, MetricasComunicacion, MetricasPorP
 export const dynamic = 'force-dynamic';
 
 export async function GET(request: Request) {
+  console.log('[API /api/metrics] Request received');
   try {
     const { searchParams } = new URL(request.url);
     const days = parseInt(searchParams.get('days') || '30');
+    console.log(`[API /api/metrics] Fetching metrics for ${days} days`);
 
     // Fecha límite para las consultas
     const fechaLimite = new Date();
@@ -139,12 +141,16 @@ export async function GET(request: Request) {
       ultimaActualizacion: new Date()
     };
 
+    console.log('[API /api/metrics] Metrics calculated successfully');
     return NextResponse.json(metrics);
 
   } catch (error) {
-    console.error('Error al obtener métricas:', error);
+    console.error('[API /api/metrics] ERROR:', error);
     return NextResponse.json(
-      { error: 'Error al obtener las métricas' },
+      { 
+        error: 'Error al obtener las métricas',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      },
       { status: 500 }
     );
   }
